@@ -8,7 +8,7 @@ public class HomeworkApp1 {
         checkSumSign();
         printColor();
         compareNumbers();
-//        testMethod();
+        testMethod();
     }
 
     public static void testMethod() {
