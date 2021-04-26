@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    private static final int SIZE = 3;
+    private static final int SIZE = 5;
+    private static final int DOTS_TO_WIN = 4;
 
     private static final char DOT_EMPTY = '•';
     private static final char DOT_X = 'X';
@@ -44,6 +45,29 @@ public class TicTacToe {
         }
     }
 
+    private static int[] getNextCellToWin(char symbol) {
+        for (int rowIndex = 0; rowIndex < map.length; rowIndex++) {
+            for (int colIndex = 0; colIndex < map[rowIndex].length; colIndex++) {
+                if (map[rowIndex][colIndex] == DOT_EMPTY && isGameMoveWinning(rowIndex, colIndex, symbol)) {
+                    return new int[]{rowIndex, colIndex};
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private static boolean isGameMoveWinning(int rowIndex, int colIndex, char symbol) {
+        setCell(rowIndex, colIndex, symbol);
+        boolean result = isWin(symbol);
+        setCell(rowIndex, colIndex, DOT_EMPTY);
+        return result;
+    }
+
+    private static void setCell(int rowIndex, int colIndex, char symbol) {
+        map[rowIndex][colIndex] = symbol;
+    }
+
     private static boolean isMapFull() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -56,19 +80,39 @@ public class TicTacToe {
     }
 
 
-    // TODO: refactor this code using for loops
     private static boolean isWin(char symbol) {
-        if (map[0][0] == symbol && map[0][1] == symbol && map[0][2] == symbol) return true;
-        if (map[1][0] == symbol && map[1][1] == symbol && map[1][2] == symbol) return true;
-        if (map[2][0] == symbol && map[2][1] == symbol && map[2][2] == symbol) return true;
+        if (checkRowsAndCols(symbol)) {
+            return true;
+        } else {
+            return checkDiagonals(symbol);
+        }
+    }
 
-        if (map[0][0] == symbol && map[1][0] == symbol && map[2][0] == symbol) return true;
-        if (map[0][1] == symbol && map[1][1] == symbol && map[2][1] == symbol) return true;
-        if (map[0][2] == symbol && map[1][2] == symbol && map[2][2] == symbol) return true;
+    private static boolean checkDiagonals(char symbol) {
+        int mainDiagCounter = 0;
+        int sideDiagCounter = 0;
+        for (int i = 0; i < SIZE; i++) {
+            mainDiagCounter = (map[i][i] == symbol) ? mainDiagCounter + 1 : 0;
+            sideDiagCounter = (map[i][map.length - 1 - i] == symbol) ? sideDiagCounter + 1 : 0;
+            if (mainDiagCounter == DOTS_TO_WIN || sideDiagCounter == DOTS_TO_WIN) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        if (map[0][0] == symbol && map[1][1] == symbol && map[2][2] == symbol) return true;
-        if (map[0][2] == symbol && map[1][1] == symbol && map[2][0] == symbol) return true;
-
+    private static boolean checkRowsAndCols(char symbol) {
+        for (int i = 0; i < SIZE; i++) {
+            int rowCounter = 0;
+            int colCounter = 0;
+            for (int j = 0; j < SIZE; j++) {
+                rowCounter = (map[i][j] == symbol) ? rowCounter + 1 : 0;
+                colCounter = (map[j][i] == symbol) ? colCounter + 1 : 0;
+                if (rowCounter == DOTS_TO_WIN || colCounter == DOTS_TO_WIN) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -79,6 +123,20 @@ public class TicTacToe {
     }
 
     private static void computerTurn() {
+        int[] cell = getNextCellToWin(DOT_O);
+        if (cell == null) {
+            cell = getNextCellToWin(DOT_X);
+            if (cell == null) {
+                cell = getRandomEmptyCell();
+            }
+        }
+        int rowIndex = cell[0];
+        int colIndex = cell[1];
+
+        setCell(rowIndex, colIndex, DOT_O);
+    }
+
+    private static int[] getRandomEmptyCell() {
         int x;
         int y;
         Random random = new Random();
@@ -88,7 +146,7 @@ public class TicTacToe {
             y = random.nextInt(SIZE);
         } while (map[x][y] != DOT_EMPTY);
 
-        map[x][y] = DOT_O;
+        return new int[] {x, y};
     }
 
     private static void humanTurn() {
@@ -112,7 +170,7 @@ public class TicTacToe {
             }
         } while (true);
 
-        map[x][y] = DOT_X;
+        setCell(x, y, DOT_X);
     }
 
     private static int readInt(Scanner scanner) {
