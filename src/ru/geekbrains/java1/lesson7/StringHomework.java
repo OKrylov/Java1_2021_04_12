@@ -5,11 +5,7 @@ public class StringHomework {
 
         String str = "I like Java!!!";
 
-        StringProcess(str);
-    }
-
-    public static void StringProcess(String str) {
-// a) Напишите метод, который принимает в качестве параметра любую строку, например “I like Java!!!”.
+        // a) Напишите метод, который принимает в качестве параметра любую строку, например “I like Java!!!”.
         System.out.println(str);
 
 // б) Распечатать последний символ строки. Используем метод String.charAt().
@@ -46,4 +42,5 @@ public class StringHomework {
         int cutValueLength = cutValue.length();
         System.out.println(str.substring(0, cutValuePos) + str.substring(cutValuePos + cutValueLength));
     }
+
 }
