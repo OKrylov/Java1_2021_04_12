@@ -7,19 +7,27 @@ public class Plate {
         this.food = food;
     }
 
-    public void info() {
-        System.out.println("plate: " + food);
-    }
-
-    public void decreaseFood(int amount) {
-        food -= amount;
-    }
-
     public int getFood() {
         return food;
     }
 
     public void setFood(int food) {
         this.food = food;
+    }
+
+    public void info() {
+        System.out.println("plate: " + food);
+    }
+
+    public void decreaseFood(int appetite) {
+        this.food -= appetite; // food = food - appetite;
+    }
+
+    public void addFood(int foodCount) {
+        this.food += foodCount;
+    }
+
+    public boolean isFoodEnough(int foodCount) {
+        return getFood() >= foodCount;
     }
 }
