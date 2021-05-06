@@ -11,7 +11,7 @@ public class Example1 {
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             setLocationRelativeTo(null);
             setSize(400, 400);
-//            setLocation(2300, 300);
+            setLocation(300, 150);
 //            setBounds(2400, 300, 400, 400);
             setVisible(true);
         }

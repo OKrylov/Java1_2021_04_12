@@ -12,30 +12,31 @@ public class CounterApp extends JFrame {
        setBounds(500, 500, 300, 120);
        setTitle("Simple Counter");
        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+       setAlwaysOnTop(true);
 
        Font font = new Font("Arial", Font.BOLD, 32);
 
-       JLabel counterValueView = new JLabel();
-       counterValueView.setFont(font);
+       JLabel counterValueView = new JLabel(String.valueOf(value));
        counterValueView.setHorizontalAlignment(SwingConstants.CENTER);
+       counterValueView.setFont(font);
        add(counterValueView, BorderLayout.CENTER);
 
        value = initialValue;
-       counterValueView.setText(String.valueOf(value));
+       refreshCounterLabel(counterValueView);
 
        JButton decrementButton = new JButton("<");
+       add(decrementButton, BorderLayout.LINE_START);
        decrementButton.setFont(font);
-       add(decrementButton, BorderLayout.WEST);
 
        JButton incrementButton = new JButton(">");
+       add(incrementButton, BorderLayout.LINE_END);
        incrementButton.setFont(font);
-       add(incrementButton, BorderLayout.EAST);
 
        decrementButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
                value--;
-               counterValueView.setText(String.valueOf(value));
+               refreshCounterLabel(counterValueView);
            }
        });
 
@@ -43,14 +44,18 @@ public class CounterApp extends JFrame {
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
                value++;
-               counterValueView.setText(String.valueOf(value));
+               refreshCounterLabel(counterValueView);
            }
        });
 
        setVisible(true);
    }
 
-   public static void main(String[] args) {
+    private void refreshCounterLabel(JLabel counterValueView) {
+        counterValueView.setText(String.valueOf(value));
+    }
+
+    public static void main(String[] args) {
        new CounterApp(0);
    }
 }

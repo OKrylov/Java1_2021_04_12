@@ -1,6 +1,7 @@
 package ru.geekbrains.java1.lesson8.events;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -14,7 +15,7 @@ public class KeyboardExample {
             setTitle("Demo");
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             JTextField field = new JTextField();
-            add(field);
+            add(field, BorderLayout.PAGE_START);
             field.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -25,12 +26,21 @@ public class KeyboardExample {
 
             field.addKeyListener(new KeyAdapter() {
                 @Override
+                public void keyPressed(KeyEvent e) {
+                    System.out.println("key pressed");
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    System.out.println("key released");
+                }
+
+                @Override
                 public void keyTyped(KeyEvent e) {
                     if (e.isShiftDown()) {
                         System.out.println("Shift down");
-                    } else {
-                        System.out.println(e.getKeyChar() + " down");
                     }
+                    System.out.println(e.getKeyChar() + " down");
                 }
             });
 

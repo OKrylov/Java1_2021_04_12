@@ -25,8 +25,6 @@ public class MouseEventExample {
                 }
             });
 
-
-
             setVisible(true);
         }
     }

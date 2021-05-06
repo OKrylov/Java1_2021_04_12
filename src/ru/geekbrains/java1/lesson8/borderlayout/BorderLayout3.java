@@ -14,6 +14,7 @@ public class BorderLayout3 {
             setLayout(new FlowLayout());
             for (int i = 0; i < jbs.length; i++) {
                 jbs[i] = new JButton("#" + i);
+                jbs[i].setPreferredSize(new Dimension(100, 30));
                 add(jbs[i]);
             }
             setVisible(true);

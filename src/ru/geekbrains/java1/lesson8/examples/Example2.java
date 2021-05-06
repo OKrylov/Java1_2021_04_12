@@ -16,14 +16,14 @@ public class Example2 {
             JButton[] jbs = new JButton[5];
             for (int i = 0; i < 5; i++) {
                 jbs[i] = new JButton("#" + i);
-                jbs[i].addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println(((JButton)e.getSource()).getText() + " was pressed");
-                    }
-                });
+//                jbs[i].addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        System.out.println(((JButton)e.getSource()).getText() + " was pressed");
+//                    }
+//                });
             }
-            setLayout(new BorderLayout());   // выбор компоновщика элементов
+//            setLayout(new BorderLayout());   // выбор компоновщика элементов
             add(jbs[0], BorderLayout.EAST); // добавление кнопки на форму
             add(jbs[1], BorderLayout.WEST);
             add(jbs[2], BorderLayout.SOUTH);

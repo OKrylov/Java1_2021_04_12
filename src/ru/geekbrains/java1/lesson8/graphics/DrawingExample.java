@@ -24,6 +24,7 @@ public class DrawingExample extends JFrame {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
+
         super.paint(g);
         simpleDrawLines(g);
     }
@@ -37,12 +38,10 @@ public class DrawingExample extends JFrame {
         g2d.fillPolygon(new int[] {400}, new int[] {400}, 1);
         g2d.fillRect(151, 151, 149, 75);
 
-        g2d.drawLine(350, 50, 350, 550);
-        g2d.drawLine(250, 150, 550, 150);
         g2d.drawOval(350, 150, 150, 150);
         g2d.setColor(Color.RED);
         g2d.fillOval(351, 151, 149, 149);
-        g2d.clearRect(350, 150, 75, 75);
+//        g2d.clearRect(350, 150, 75, 75);
     }
 
     public static void main(String[] args) {
