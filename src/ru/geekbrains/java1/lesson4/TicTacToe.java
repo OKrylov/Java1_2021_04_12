@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    private static final int SIZE = 5;
-    private static final int DOTS_TO_WIN = 4;
+    public static final int SIZE = 3;
+    private static final int DOTS_TO_WIN = 3;
 
-    private static final char DOT_EMPTY = '•';
-    private static final char DOT_X = 'X';
-    private static final char DOT_O = 'O';
+    public static final char DOT_EMPTY = '•';
+    public static final char DOT_X = 'X';
+    public static final char DOT_O = 'O';
 
-    private static final char[][] map = new char[SIZE][SIZE];
+    public static final char[][] map = new char[SIZE][SIZE];
 
 
     public static void main(String[] args) {
@@ -64,11 +64,11 @@ public class TicTacToe {
         return result;
     }
 
-    private static void setCell(int rowIndex, int colIndex, char symbol) {
+    public static void setCell(int rowIndex, int colIndex, char symbol) {
         map[rowIndex][colIndex] = symbol;
     }
 
-    private static boolean isMapFull() {
+    public static boolean isMapFull() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 if (map[i][j] == DOT_EMPTY) {
@@ -80,7 +80,7 @@ public class TicTacToe {
     }
 
 
-    private static boolean isWin(char symbol) {
+    public static boolean isWin(char symbol) {
         if (checkRowsAndCols(symbol)) {
             return true;
         } else {
@@ -122,7 +122,7 @@ public class TicTacToe {
         System.out.println();
     }
 
-    private static void computerTurn() {
+    public static int[] computerTurn() {
         int[] cell = getNextCellToWin(DOT_O);
         if (cell == null) {
             cell = getNextCellToWin(DOT_X);
@@ -134,6 +134,7 @@ public class TicTacToe {
         int colIndex = cell[1];
 
         setCell(rowIndex, colIndex, DOT_O);
+        return cell;
     }
 
     private static int[] getRandomEmptyCell() {
@@ -199,7 +200,7 @@ public class TicTacToe {
         System.out.println();
     }
 
-    private static void initMap() {
+    public static void initMap() {
         for (int i = 0; i < SIZE; i++) {
             Arrays.fill(map[i], DOT_EMPTY);
         }
